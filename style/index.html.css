@@ -1,0 +1,161 @@
+html,
+body,
+header {
+    margin: 0;
+    padding: 0;
+}
+
+br.clear {
+    font-size: 1px;
+    clear: both;
+}
+
+/* z-index:100 */
+header {
+    height: 60px;
+    background-color: #eee;
+    border-bottom: solid 1px #aaa;
+    z-index: 100;
+}
+header h1 {
+    float: left;
+    margin: 0 15px;
+    color: #444;
+    text-shadow: 1px 1px 1px #fff;
+    font: bold 32px/60px 'Microsoft YaHei', simhei, STHeiTi, sans-serif, Verdana;
+}
+header nav {
+    margin-left: 256px;
+}
+header nav a {
+    float: left;
+    color: #333;
+    text-decoration: none;
+    border: solid 1px gray;
+    border-radius: 3px;
+    padding: 5px 10px;
+    text-shadow: 1px 1px 1px #fff;
+    margin: 25px 20px 0 0;
+    white-space: nowrap;
+    font: normal 14px/1 Verdana, Arial, Helvetica, sans-serif;
+}
+header nav a.latest {
+    float: right;
+    border: none;
+}
+header nav a:hover {
+    color: #0a0;
+    background-color: #f8f8f8;
+}
+
+.jsmind-container {
+    clear: both;
+}
+.jsmind-container a {
+    color: #fff;
+}
+
+.jsmind-tools {
+    position: absolute;
+    z-index: 100;
+    top: 70px;
+    left: 10px;
+    border: solid 1px #fff;
+    background-color: #fff;
+    border-radius: 5px;
+    opacity: 0.3;
+}
+.jsmind-tools:hover {
+    opacity: 1;
+}
+.jsmind-tools-active {
+    border-color: gray;
+    opacity: 1;
+}
+.jsmind-tools ul {
+    float: left;
+    margin: 0 3px;
+    padding: 0;
+    list-style: none;
+}
+.jsmind-tools li {
+    float: left;
+    display: none;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    font-size: 24px;
+    line-height: 36px;
+    text-indent: 6px;
+    letter-spacing: 6px;
+    opacity: 0.4;
+    cursor: default;
+}
+.jsmind-tools li.visible {
+    display: block;
+}
+.jsmind-tools li:hover {
+    opacity: 1;
+}
+.jsmind-tools-active li.visible {
+    opacity: 1;
+}
+.jsmind-tools-active li {
+    display: block;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    border-top: solid 1px #bbb;
+}
+footer nav {
+    font: normal 13px/30px Verdana, Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+}
+footer nav a {
+    color: #666;
+    text-decoration: none;
+}
+
+@media screen and (max-device-width: 1024px) {
+    .jsmind-tools li {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    header {
+        height: 36px;
+    }
+    header h1 {
+        margin: 0 4px;
+        font-size: 18px;
+        line-height: 36px;
+    }
+    header h1:first-letter {
+        line-height: 16px;
+    } /* Wingdings v */
+    header nav {
+        margin-left: 150px;
+    }
+    header nav a {
+        margin-top: 10px;
+    }
+
+    .jsmind-tools {
+        top: 44px;
+        left: 8px;
+    }
+
+    footer {
+        height: 20px;
+    }
+    footer nav {
+        line-height: 20px;
+    }
+}
