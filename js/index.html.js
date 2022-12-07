@@ -34,7 +34,7 @@
         jsMind.$.on($w, 'hashchange', load_mind);
         jsMind.$.on($w, 'resize', reset_container_size);
         jsMind.$.on($g('jsmind_tools'), 'click', tools_handler);
-        jsMind.$.on($d, 'click', hide_setting_visible);
+        jsMind.$.on($d, 'click', hide_menu_visible);
     }
 
     function _load_mind(lang) {
@@ -65,28 +65,28 @@
         }, 300);
     }
 
-    var _setting_visible = false;
-    function toggle_setting_visible(e) {
+    var _menu_visible = false;
+    function toggle_menu_visible(e) {
         var tools = $g('jsmind_tools');
-        if (_setting_visible) {
-            _setting_visible = false;
+        if (_menu_visible) {
+            _menu_visible = false;
             tools.className = tools.className.replace(/\s*jsmind-tools-active/gi, '');
         } else {
-            _setting_visible = true;
+            _menu_visible = true;
             tools.className += ' jsmind-tools-active';
         }
     }
-    function hide_setting_visible(e) {
-        if (!_setting_visible) {
+    function hide_menu_visible(e) {
+        if (!_menu_visible) {
             return;
         }
         var e_src = e.target || event.srcElement;
-        if (e_src != null && e_src.getAttribute('action') === 'toggle') {
+        if (e_src != null && e_src.getAttribute('action') === 'menu') {
             return;
         }
 
         var tools = $g('jsmind_tools');
-        _setting_visible = false;
+        _menu_visible = false;
         tools.className = tools.className.replace(/\s*jsmind-tools-active/gi, '');
     }
 
@@ -102,7 +102,7 @@
     }
 
     var tools_handlers = {
-        toggle: toggle_setting_visible,
+        menu: toggle_menu_visible,
         open: open_open_dialog,
         save: open_save_dialog,
         screenshot: take_screenshot,
