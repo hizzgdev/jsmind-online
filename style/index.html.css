@@ -51,9 +51,6 @@ header nav a:hover {
 .jsmind-container {
     clear: both;
 }
-.jsmind-container a {
-    color: #fff;
-}
 
 .jsmind-tools {
     position: absolute;
@@ -90,18 +87,53 @@ header nav a:hover {
     letter-spacing: 6px;
     opacity: 0.4;
     cursor: default;
+    user-select: none;
 }
 .jsmind-tools li.visible {
     display: block;
 }
+.jsmind-tools li.hidden {
+    display: none;
+}
 .jsmind-tools li:hover {
     opacity: 1;
 }
-.jsmind-tools-active li.visible {
+.jsmind-tools li.text-lang {
+    width: auto;
+}
+.jsmind-tools li.text-lang span{
+    display: block;
+    margin: 6px;
+    height: 24px;
+    width: 24px;
+    color: #fff;
+    background-color: #000;
+    letter-spacing: 0;
+    border-radius: 4px;
+    text-indent: 0;
+    text-align: center;
+    font: normal 16px/24px 'Microsoft YaHei', simhei, STHeiTi, sans-serif, Verdana;
+}
+.jsmind-tools-active li.title {
     opacity: 1;
 }
 .jsmind-tools-active li {
     display: block;
+}
+.jsmind-tools-active li.hidden {
+    display: none;
+}
+
+.jsmind-open-dialog {
+    position: absolute;
+    z-index: 101;
+    top: 40px;
+    border: solid 1px gray;
+    background-color: #fff;
+    border-radius: 5px;
+    opacity: 1;
+    width: 400px;
+    height: 200px;
 }
 
 footer {

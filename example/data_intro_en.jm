@@ -17,11 +17,6 @@
                 "leading-line-color": "#e67e22"
             },
             {
-                "id": "a387",
-                "topic": "<a href='#zh'>中文</a> | EN",
-                "direction": "left"
-            },
-            {
                 "id": "5b35",
                 "topic": "Use mouse",
                 "direction": "right",
@@ -80,6 +75,10 @@
                 "topic": "Why jsMind?",
                 "direction": "left",
                 "children": [
+                    {
+                        "id": "471a",
+                        "topic": "Open Source"
+                    },
                     {
                         "id": "693b",
                         "topic": "Fast and Faster"
