@@ -35,6 +35,7 @@
         jsMind.$.on($w, 'resize', reset_container_size);
         jsMind.$.on($g('jsmind_tools'), 'click', tools_handler);
         jsMind.$.on($d, 'click', hide_menu_visible);
+        jsMind.$.on($g('jm_file_input'), 'change', jm_file_input_changed);
     }
 
     var _current_in_demo = true;
@@ -106,7 +107,9 @@
         tools.className = tools.className.replace(/\s*jsmind-tools-active/gi, '');
     }
 
-    function open_open_dialog(e) {}
+    function open_open_dialog(e) {
+        $g('jm_file_input').click();
+    }
     function open_save_dialog(e) {
         var mind_data = _jm.get_data();
         var mind_name = mind_data.meta.name;
@@ -122,6 +125,7 @@
     }
     function jsmind_empty(e) {
         _jm.show();
+        _jm.mind.name = 'jsMind Map - ' + new Date().getTime();
         _leave_demo();
     }
 
@@ -141,6 +145,20 @@
         var action = ele.getAttribute('action');
         if (action in tools_handlers) {
             tools_handlers[action](e);
+        }
+    }
+
+    function jm_file_input_changed(e) {
+        if (this.files.length > 0) {
+            var file_data = this.files[0];
+            jsMind.util.file.read(file_data, function (jsmind_data, jsmind_name) {
+                var mind = jsMind.util.json.string2json(jsmind_data);
+                if (!!mind) {
+                    _jm.show(mind);
+                } else {
+                    console.error('can not open this file as a jsMind file');
+                }
+            });
         }
     }
 

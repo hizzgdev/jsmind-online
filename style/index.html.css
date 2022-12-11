@@ -48,6 +48,11 @@ header nav a:hover {
     background-color: #f8f8f8;
 }
 
+.hidden-panel {
+    position: absolute;
+    top: -10000px;
+}
+
 .jsmind-container {
     clear: both;
 }
