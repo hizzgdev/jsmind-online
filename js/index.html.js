@@ -61,8 +61,21 @@
         location.href = '#' + new_lang;
     }
 
+    function _get_lang() {
+        if (location.hash == '#zh') {
+            return 'zh';
+        }
+        let langs = navigator.languages.map(l => l.substring(0, 2));
+        for (let lang of langs) {
+            if (lang === 'zh' || lang === 'en') {
+                return lang;
+            }
+        }
+        return 'en';
+    }
+
     function load_mind_demo(force) {
-        var lang = location.hash === '#zh' ? 'zh' : 'en';
+        var lang = _get_lang();
         $g('lang_toggle').innerHTML = lang === 'zh' ? 'En' : '中';
         if (!!force || _current_lang !== lang) {
             _current_lang = lang;
@@ -155,6 +168,7 @@
                 var mind = jsMind.util.json.string2json(jsmind_data);
                 if (!!mind) {
                     _jm.show(mind);
+                    _leave_demo();
                 } else {
                     console.error('can not open this file as a jsMind file');
                 }
