@@ -62,8 +62,11 @@
     }
 
     function _get_lang() {
-        if (location.hash == '#zh') {
-            return 'zh';
+        if (location.hash.length === 3) {
+            let lang = location.hash.substring(1, 3);
+            if (lang === 'zh' || lang === 'en') {
+                return lang;
+            }
         }
         let langs = navigator.languages.map(l => l.substring(0, 2));
         for (let lang of langs) {
