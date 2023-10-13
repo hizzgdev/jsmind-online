@@ -137,7 +137,7 @@
         load_mind_demo(true);
     }
     function take_screenshot(e) {
-        _jm.screenshot.shootDownload();
+        _jm.screenshot.shoot();
     }
     function jsmind_empty(e) {
         _jm.show();
