@@ -56,7 +56,7 @@
         $g('menu_item_lang_toggle').className = 'text-lang visible';
     }
     function _load_mind_demo(lang) {
-        var mind_url = 'example/data_intro_' + lang + '.jm';
+        var mind_url = 'example/data_intro_' + lang + '.json';
         jsMind.util.ajax.get(mind_url, function (mind) {
             _jm.show(mind);
             _enter_demo();
