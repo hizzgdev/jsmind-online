@@ -25,6 +25,14 @@
             editable: true,
             container: 'jsmind_container',
             theme: 'greensea',
+            plugin: {
+                screenshot: {
+                    watermark: {
+                        left: "",
+                        right: "https://jsmind.online"
+                    }
+                }
+            }
         };
         _jm = new jsMind(options);
         _jm.init();

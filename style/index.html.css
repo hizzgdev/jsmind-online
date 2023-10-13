@@ -45,7 +45,6 @@ header nav a.latest {
 }
 header nav a:hover {
     color: #0a0;
-    background-color: #f8f8f8;
 }
 
 .hidden-panel {
