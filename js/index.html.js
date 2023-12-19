@@ -15,7 +15,8 @@
         DOM_TO_IMAGE: '/dom-to-image@2.6.0/dist/dom-to-image.min.js'
     }
     const LOCAL_ASSETS = {
-        JSMIND_ONLINE: '/js/jsmind-online.js'
+        JSMIND_ONLINE: '/js/jsmind-online.js',
+        ENTYPO_STYLE: '/style/entypo/style.css'
     }
 
     const LOAD_TIMEOUT_MS = 1000;
@@ -39,7 +40,7 @@
                 return testAvailableCdn(0, resolveWrapper, reject);
             }
 
-            loadStyle(cdn, function () {
+            loadStyle(cdn + CDN_ASSETS.JSMIND_STYLE_SHEET, function () {
                 resolve(cdn);
             }, function () {
                 localStorage.removeItem('cdn');
@@ -54,31 +55,33 @@
             return;
         }
         const cdn = CDN_LIST[cdnIndex]
-        loadStyle(cdn, function () {
+        loadStyle(cdn + CDN_ASSETS.JSMIND_STYLE_SHEET, function () {
             resolve(cdn)
         }, function () {
             testAvailableCdn(cdnIndex + 1, resolve, reject);
         });
     }
 
-    function loadStyle(cdn, onload, onerror) {
+    function loadStyle(url, onload, onerror) {
         let link = $d.createElement('link');
-        let timeoutHandle = $w.setTimeout(function () {
-            $d.head.removeChild(link);
-            onerror();
-        }, LOAD_TIMEOUT_MS)
-        link.onerror = function () {
-            $w.clearTimeout(timeoutHandle);
-            $d.head.removeChild(link);
-            onerror();
-        }
-        link.onload = function () {
-            $w.clearTimeout(timeoutHandle);
-            onload();
+        if (!!onload && !!onerror) {
+            let timeoutHandle = $w.setTimeout(function () {
+                $d.head.removeChild(link);
+                onerror();
+            }, LOAD_TIMEOUT_MS)
+            link.onerror = function () {
+                $w.clearTimeout(timeoutHandle);
+                $d.head.removeChild(link);
+                onerror();
+            };
+            link.onload = function () {
+                $w.clearTimeout(timeoutHandle);
+                onload();
+            };
         }
         link.type = 'text/css';
         link.rel = 'stylesheet';
-        link.href = `${cdn}${CDN_ASSETS.JSMIND_STYLE_SHEET}`;
+        link.href = url;
         $d.head.appendChild(link);
     }
 
@@ -114,6 +117,7 @@
     }
 
     (function () {
+        loadStyle(LOCAL_ASSETS.ENTYPO_STYLE);
         tryLoadStyle().then(function (cdn) {
             loadScripts(cdn);
         }).catch(function () {
