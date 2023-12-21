@@ -15,8 +15,7 @@
         DOM_TO_IMAGE: '/dom-to-image@2.6.0/dist/dom-to-image.min.js'
     }
     const LOCAL_ASSETS = {
-        JSMIND_ONLINE: '/js/jsmind-online.js',
-        ENTYPO_STYLE: '/style/entypo/style.css'
+        JSMIND_ONLINE: '/js/jsmind-online.js'
     }
 
     const LOAD_TIMEOUT_MS = 1000;
@@ -117,7 +116,6 @@
     }
 
     (function () {
-        loadStyle(LOCAL_ASSETS.ENTYPO_STYLE);
         tryLoadStyle().then(function (cdn) {
             loadScripts(cdn);
         }).catch(function () {

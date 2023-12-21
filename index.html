@@ -6,13 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=8" />
         <link rel="icon" href="/favicon.svg">
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+        <link type="text/css" rel="stylesheet" href="style/entypo-icomoon/style.css" />
         <link type="text/css" rel="stylesheet" href="style/index.html.css" />
         <title>jsMind - Open Source Online Mind Map</title>
     </head>
 
     <body>
         <header>
-            <h1 class="icon-bolt">jsMind</h1>
+            <h1><span class="icon-bolt"></span>jsMind</h1>
             <nav>
                 <a href="//github.com/hizzgdev/jsmind" target="_blank" class="latest">Developer &amp; Open Source</a>
             </nav>
@@ -21,15 +22,48 @@
 
         <div id="jsmind_container" class="jsmind-container"></div>
         <div id="jsmind_tools" class="jsmind-tools">
-            <ul>
-                <li action="menu" class="icon-list-2 visible title" title="click for more function">Menu</li>
-                <li action="empty" class="icon-landscape" title="clean current mindmap and create new one">Rebuild</li>
-                <li action="open" class="icon-book-2" title="open a mindmap from ...">Open</li>
-                <li action="save" class="icon-download" title="export current mindmap to ...">Save</li>
-                <li action="screenshot" class="icon-camera" title="take a screenshot on current mindmap">Screenshot</li>
-                <!--<li action="share" class="icon-share" title="share current mindmap to ...">Share</li>-->
-                <li id="menu_item_lang_toggle" class="text-lang visible"><span action="lang" id="lang_toggle">中</span></li>
-                <li action="help" class="icon-help" title="how to use jsMind ...">Usage</li>
+            <ul class="menu">
+                <li action="menu" class="menu-item title"><span class="menu-icon icon-menu"></span><span
+                        class="menu-text">Menu</span>
+                </li>
+                <li class="menu-item"><span class="menu-icon icon-compose"></span><span class="menu-text">Compose..</span>
+                    <ul class="menu menu-compose-options">
+                        <li action="empty" class="menu-item">
+                            <span class="menu-icon icon-wand"></span><span class="menu-text">New mindmap</span>
+                        </li>
+                        <li action="open" class="menu-item">
+                            <span class="menu-icon icon-upload"></span><span class="menu-text">Open local .jm file</span>
+                        </li>
+                        <!-- <li class="menu-item">
+                            <span class="menu-icon icon-link"></span><span class="menu-text">Open a share link</span>
+                        </li> -->
+                        <li class="menu-item menu-divider"></li>
+                        <li action="sample-zh" class="menu-item">
+                            <span class="menu-icon icon-bolt"></span><span class="menu-text">中文示例</span>
+                        </li>
+                        <li action="sample-en" class="menu-item">
+                            <span class="menu-icon icon-bolt"></span><span class="menu-text">English Sample</span>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item"><span class="menu-icon icon-export"></span><span class="menu-text">Export..</span>
+                    <ul class="menu menu-export-options">
+                        <li action="download" class="menu-item">
+                            <span class="menu-icon icon-download"></span><span class="menu-text">Download .jm file</span>
+                        </li>
+                        <li action="screenshot" class="menu-item">
+                            <span class="menu-icon icon-camera"></span><span class="menu-text">Take a screenshot</span>
+                        </li>
+                        <!-- <li class="menu-item">
+                            <span class="menu-icon icon-link"></span><span class="menu-text">Create a share link</span>
+                        </li> -->
+                    </ul>
+                </li>
+                <li action="help" class="menu-item">
+                    <span class="menu-icon icon-help"></span><span class="menu-text">Help</span>
+                </li>
+                <!-- <li class="menu-item"><span class="menu-icon icon-trash"></span><span class="menu-text">Trash</span></li> -->
+                <!-- <li class="menu-item"><span class="menu-icon icon-sphere"></span><span action="lang" id="lang_toggle" class="menu-text">English</span></li> -->
             </ul>
             <div class="hidden-panel">
                 <input type="file" id="jm_file_input" />

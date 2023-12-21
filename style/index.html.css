@@ -39,6 +39,7 @@ header nav a {
     white-space: nowrap;
     font: normal 14px/1 Verdana, Arial, Helvetica, sans-serif;
 }
+
 header nav a.latest {
     float: right;
     border: none;
@@ -69,65 +70,99 @@ header nav a:hover {
 .jsmind-tools:hover {
     opacity: 1;
 }
+.jsmind-tools ul {
+    float: left;
+    margin: 0 3px;
+}
+.jsmind-tools li {
+    display: none;
+}
+
+.jsmind-tools li.title {
+    display: list-item;
+}
+
+.jsmind-tools li.title .menu-text {
+    display: none;
+}
+
 .jsmind-tools-active {
     border-color: gray;
     opacity: 1;
 }
-.jsmind-tools ul {
-    float: left;
-    margin: 0 3px;
-    padding: 0;
-    list-style: none;
+
+.jsmind-tools-active li {
+    display: list-item;
 }
-.jsmind-tools li {
-    float: left;
-    display: none;
-    width: 36px;
-    height: 36px;
-    overflow: hidden;
-    font-size: 24px;
-    line-height: 36px;
-    text-indent: 6px;
-    letter-spacing: 6px;
-    opacity: 0.4;
-    cursor: default;
-    user-select: none;
-}
-.jsmind-tools li.visible {
-    display: block;
-}
-.jsmind-tools li.hidden {
-    display: none;
-}
-.jsmind-tools li:hover {
-    opacity: 1;
-}
-.jsmind-tools li.text-lang {
-    width: auto;
-}
-.jsmind-tools li.text-lang span{
-    display: block;
-    margin: 6px;
-    height: 24px;
-    width: 24px;
-    color: #fff;
-    background-color: #000;
-    letter-spacing: 0;
-    border-radius: 4px;
-    text-indent: 0;
-    text-align: center;
-    font: normal 16px/24px 'Microsoft YaHei', simhei, STHeiTi, sans-serif, Verdana;
-}
+
 .jsmind-tools-active li.title {
     opacity: 1;
 }
-.jsmind-tools-active li {
-    display: block;
-}
-.jsmind-tools-active li.hidden {
-    display: none;
+
+.jsmind-tools-active li.title .menu-text {
+    display: inline-block;
 }
 
+.menu {
+    padding: 6px 8px;
+    list-style: none;
+}
+
+.menu li {
+    height: 28px;
+    opacity: 0.4;
+    cursor: default;
+    user-select: none;
+    font-family: "Microsoft YaHei", simhei, STHeiTi, sans-serif, Verdana;
+        vertical-align: middle;
+}
+.menu li:hover {
+    opacity: 1;
+}
+.menu .menu-icon {
+    display: inline-block;
+    font-size: 18px;
+    height: 28px;
+    line-height: 28px;
+    margin-right: 6px;
+    padding: 0;
+    vertical-align: middle;
+}
+.menu .menu-text {
+    display: inline-block;
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle;
+}
+.menu .menu-divider {
+    border-bottom: solid 1px gray;
+    height: 0;
+    margin: 6px 0;
+}
+.menu-item {
+    position: relative;
+}
+.menu-item .menu {
+    background-color: #fff;
+    border: solid 1px gray;
+    border-radius: 5px;
+    display: none;
+    position: absolute;
+    left: 95%;
+    top: 0;
+    z-index: 102;
+}
+.menu-item:hover .menu {
+    display: block;
+}
+.menu-compose-options {
+    width: 160px;
+}
+
+.menu-export-options {
+    width: 160px;
+}
 .jsmind-open-dialog {
     position: absolute;
     z-index: 101;

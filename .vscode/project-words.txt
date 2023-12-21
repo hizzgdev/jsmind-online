@@ -1,2 +1,6 @@
 jsmind
 freemind
+mindmap
+simhei
+greensea
+Parens
