@@ -48,13 +48,39 @@ header nav a:hover {
     color: #0a0;
 }
 
+.setting-panel-hidden aside {
+    display: none;
+}
+
+.setting-panel-visible aside {
+    display: block;
+}
 .hidden-panel {
     position: absolute;
     top: -10000px;
 }
 
 .jsmind-container {
-    clear: both;
+float: left;
+}
+
+aside {
+    background-color: #f9f9f9;
+    border-left: solid 1px #bbb;
+    float: left;
+}
+
+aside .title-bar {
+    height: 36px;
+    /* border-bottom: solid 1px #fff; */
+    text-align: right;
+}
+
+aside .title-bar span {
+    color: gray;
+    font-size: 14px;
+    line-height: 36px;
+    margin-right: 11px;
 }
 
 .jsmind-tools {
@@ -163,10 +189,11 @@ header nav a:hover {
 .menu-export-options {
     width: 160px;
 }
-.jsmind-open-dialog {
+.dialog {
     position: absolute;
     z-index: 101;
     top: 40px;
+    left: 400px;
     border: solid 1px gray;
     background-color: #fff;
     border-radius: 5px;
@@ -174,7 +201,6 @@ header nav a:hover {
     width: 400px;
     height: 200px;
 }
-
 footer {
     position: absolute;
     bottom: 0;

@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'entypo-icomoon';
   src:
-    url('fonts/entypo-icomoon.ttf?ekzhtk') format('truetype'),
-    url('fonts/entypo-icomoon.woff?ekzhtk') format('woff'),
-    url('fonts/entypo-icomoon.svg?ekzhtk#entypo-icomoon') format('svg');
+    url('fonts/entypo-icomoon.ttf?q9zi5') format('truetype'),
+    url('fonts/entypo-icomoon.woff?q9zi5') format('woff'),
+    url('fonts/entypo-icomoon.svg?q9zi5#entypo-icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -62,4 +62,7 @@
 }
 .icon-sphere:before {
   content: "\e9c9";
+}
+.icon-cross:before {
+  content: "\ea0f";
 }

@@ -1,17 +1,21 @@
 (function ($w) {
     'use strict';
-    var $d = $w.document;
-    var $g = function (id) {
+    const $d = $w.document;
+    const $g = function (id) {
         return $d.getElementById(id);
     };
-    var $header = $d.getElementsByTagName('header')[0];
-    var $footer = $d.getElementsByTagName('footer')[0];
-    var $container = $g('jsmind_container');
-    var _h_header = $header.clientHeight;
-    var _h_footer = $footer.clientHeight;
+    const $header = $d.getElementsByTagName('header')[0];
+    const $footer = $d.getElementsByTagName('footer')[0];
+    const $layout = $g('layout');
+    const $container = $g('jsmind_container');
+    const $setting_panel = $d.getElementsByTagName('aside')[0];
+    const _h_header = $header.clientHeight;
+    const _h_footer = $footer.clientHeight;
 
-    var jsMind = $w.jsMind;
-    var _jm = null;
+    const jsMind = $w.jsMind;
+    const SETTING_PANEL_WIDTH = 280;
+    let _jm = null;
+    let _setting_panel_visible = false;
 
     function page_load() {
         init_jsMind();
@@ -43,6 +47,7 @@
         jsMind.$.on($g('jsmind_tools'), 'click', tools_handler);
         jsMind.$.on($d, 'click', hide_menu_visible);
         jsMind.$.on($g('jm_file_input'), 'change', jm_file_input_changed);
+        jsMind.$.on($g('setting_panel_close_button'), 'click', hide_setting_panel)
     }
 
     function load_mind_demo(lang) {
@@ -109,7 +114,26 @@
         var mind_str = jsMind.util.json.json2string(mind_data);
         jsMind.util.file.save(mind_str, 'text/jsmind', mind_name + '.jm');
     }
-    function open_share_dialog(e) { }
+
+    function show_setting_panel() {
+        if (_setting_panel_visible) { return; }
+        _setting_panel_visible = true;
+        $setting_panel.style.width = (SETTING_PANEL_WIDTH - 2) + 'px';
+        $layout.className = 'setting-panel-visible';
+        set_container_size();
+        $container.children[0].scrollBy(SETTING_PANEL_WIDTH / 2, 0);
+    }
+    function hide_setting_panel() {
+        if (!_setting_panel_visible) { return; }
+        _setting_panel_visible = false;
+        $layout.className = 'setting-panel-hidden';
+        $container.children[0].scrollBy(-SETTING_PANEL_WIDTH / 2, 0);
+        console.log('hide');
+        set_container_size();
+    }
+    function open_share_dialog(e) {
+        show_setting_panel();
+    }
     function open_help_dialog(e) {
         load_mind_demo();
     }
@@ -126,11 +150,11 @@
         open: open_open_dialog,
         download: open_save_dialog,
         screenshot: take_screenshot,
-        share: open_share_dialog,
         empty: jsmind_empty,
         help: open_help_dialog,
         'sample-zh': () => load_mind_demo('zh'),
-        'sample-en': () => load_mind_demo('en')
+        'sample-en': () => load_mind_demo('en'),
+        'create-share-link': open_share_dialog
     };
 
     function find_menu_item_action(ele) {
@@ -166,10 +190,14 @@
     }
 
     function set_container_size() {
-        var ch = $w.innerHeight - _h_header - _h_footer - 2;
-        var cw = $w.innerWidth;
+        let ch = $w.innerHeight - _h_header - _h_footer - 2;
+        let cw = $w.innerWidth;
+        if (_setting_panel_visible) {
+            cw -= SETTING_PANEL_WIDTH;
+        }
         $container.style.height = ch + 'px';
         $container.style.width = cw + 'px';
+        $setting_panel.style.height = ch + 'px';
     }
 
     page_load();
