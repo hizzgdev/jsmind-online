@@ -22,6 +22,7 @@
     const HASHES = {
         NEW: "#new",
         SAMPLE: '#sample',
+        LOCAL: '#local'
     }
 
     let _jm = null;
@@ -68,6 +69,8 @@
             load_mind_demo();
         } else if (hash.startsWith('#m/')) {
             load_mindmap(hash.substring(3, 39));
+        } else if (hash === HASHES.LOCAL) {
+            // Do nothing
         } else {
             hash_to(HASHES.SAMPLE);
         }
@@ -184,7 +187,7 @@
         show_setting_panel();
     }
     function open_help_dialog(e) {
-        load_mind_demo();
+        hash_to(HASHES.SAMPLE);
     }
     function take_screenshot(e) {
         _jm.shoot();
@@ -247,6 +250,7 @@
                 var mind = jsMind.util.json.string2json(jsmind_data);
                 if (!!mind) {
                     _jm.show(mind);
+                    hash_to(HASHES.LOCAL);
                 } else {
                     console.error('can not open this file as a jsMind file');
                 }
