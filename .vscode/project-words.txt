@@ -1,6 +1,7 @@
 jsmind
 freemind
 mindmap
+mindmaps
 simhei
 greensea
 Parens

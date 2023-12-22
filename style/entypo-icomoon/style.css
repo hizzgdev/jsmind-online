@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'entypo-icomoon';
   src:
-    url('fonts/entypo-icomoon.ttf?q9zi5') format('truetype'),
-    url('fonts/entypo-icomoon.woff?q9zi5') format('woff'),
-    url('fonts/entypo-icomoon.svg?q9zi5#entypo-icomoon') format('svg');
+    url('fonts/entypo-icomoon.ttf?lqe97h') format('truetype'),
+    url('fonts/entypo-icomoon.woff?lqe97h') format('woff'),
+    url('fonts/entypo-icomoon.svg?lqe97h#entypo-icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-warning:before {
+  content: "\e909";
+}
 .icon-camera:before {
   content: "\e900";
 }

@@ -1,101 +1,128 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=8" />
-        <link rel="icon" href="/favicon.svg">
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
-        <link type="text/css" rel="stylesheet" href="style/entypo-icomoon/style.css" />
-        <link type="text/css" rel="stylesheet" href="style/index.html.css" />
-        <title>jsMind - Open Source Online Mind Map</title>
-    </head>
 
-    <body>
-        <header>
-            <h1><span class="icon-bolt"></span>jsMind</h1>
-            <nav>
-                <a href="//github.com/hizzgdev/jsmind" target="_blank" class="latest">Developer &amp; Open Source</a>
-            </nav>
-            <a name="top"></a>
-        </header>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=8" />
+    <link rel="icon" href="/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+    <link type="text/css" rel="stylesheet" href="style/entypo-icomoon/style.css" />
+    <link type="text/css" rel="stylesheet" href="style/index.html.css" />
+    <title>jsMind - Open Source Online Mind Map</title>
+</head>
 
-        <div id="layout" class="setting-panel-hidden">
+<body>
+    <header>
+        <h1><span class="icon-bolt"></span>jsMind</h1>
+        <nav>
+            <a href="//github.com/hizzgdev/jsmind" target="_blank" class="latest">Developer &amp; Open Source</a>
+        </nav>
+        <a name="top"></a>
+    </header>
+
+    <div id="layout" class="setting-panel-hidden">
         <div id="jsmind_container" class="jsmind-container"></div>
-            <aside>
-                <div class="title-bar"><span id="setting_panel_close_button" class="icon-cross"></span></div>
-                <div>
-                    dialog
-                </div>
+        <aside>
+            <div class="title-bar"><span action="close-setting-panel" class="icon-cross action-trigger"></span></div>
+            <section>
+                <p><em>Experimental</em></p>
+                <p>Share your mindmap with others via link. This is an experimental feature, please be aware at this
+                    stage:</p>
+                <ul class="notes">
+                    <li>The shared mindmap will be deleted after 1 hour.</li>
+                    <li>The link will also expire when the mindmap is deleted.</li>
+                </ul>
+                <p>
+                    <input type="text" placeholder="Your name or email" id="jsmind_author">
+                    <button action="share" class="action-trigger">Continue</button>
+                </p>
+                <p id="share_progress">Creating the shared link to the mindmap.</p>
+                <p>
+                    <code id="shared_link"
+                        class="multi-line"><a href="https://jsmind.online/#m/2b8b75f1-9fff-42d8-83f9-031039550ee0">https://jsmind.online/#m/2b8b75f1-9fff-42d8-83f9-031039550ee0</a></code>
+                </p>
+            </section>
             </aside>
         <div id="jsmind_tools" class="jsmind-tools">
             <ul class="menu">
-                <li action="menu" class="menu-item title"><span class="menu-icon icon-menu"></span><span
+                <li action="menu" class="menu-item action-trigger title"><span class="menu-icon icon-menu"></span><span
                         class="menu-text">Menu</span>
                 </li>
                 <li class="menu-item"><span class="menu-icon icon-compose"></span><span class="menu-text">Compose..</span>
                     <ul class="menu menu-compose-options">
-                        <li action="empty" class="menu-item">
+                        <li action="empty" class="menu-item action-trigger">
                             <span class="menu-icon icon-wand"></span><span class="menu-text">New mindmap</span>
                         </li>
-                        <li action="open" class="menu-item">
-                            <span class="menu-icon icon-upload"></span><span class="menu-text">Open local .jm file</span>
+                        <li action="open" class="menu-item action-trigger">
+                            <span class="menu-icon icon-upload"></span><span class="menu-text">Open local .jm
+                                file</span>
                         </li>
-                        <!-- <li class="menu-item">
-                            <span class="menu-icon icon-link"></span><span class="menu-text">Open a share link</span>
-                        </li> -->
+                        <!-- <li class="menu-item"> <span class="menu-icon icon-link"></span><span class="menu-text">Open a shared link</span> </li> -->
                         <li class="menu-item menu-divider"></li>
-                        <li action="sample-zh" class="menu-item">
-                            <span class="menu-icon icon-bolt"></span><span class="menu-text">中文示例</span>
-                        </li>
-                        <li action="sample-en" class="menu-item">
-                            <span class="menu-icon icon-bolt"></span><span class="menu-text">English Sample</span>
+                        <li action="sample" class="menu-item action-trigger">
+                            <span class="menu-icon icon-bolt"></span><span class="menu-text">Sample</span>
                         </li>
                     </ul>
                 </li>
                 <li class="menu-item"><span class="menu-icon icon-export"></span><span class="menu-text">Export..</span>
                     <ul class="menu menu-export-options">
-                        <li action="download" class="menu-item">
-                            <span class="menu-icon icon-download"></span><span class="menu-text">Download .jm file</span>
+                        <li action="download" class="menu-item action-trigger">
+                            <span class="menu-icon icon-download"></span><span class="menu-text">Download .jm
+                                file</span>
                         </li>
-                        <li action="screenshot" class="menu-item">
+                        <li action="screenshot" class="menu-item action-trigger">
                             <span class="menu-icon icon-camera"></span><span class="menu-text">Take a screenshot</span>
                         </li>
-                        <!-- <li action="create-share-link" class="menu-item">
-                            <span class="menu-icon icon-link"></span><span class="menu-text">Create a share link</span>
-                        </li> -->
+                        <li action="create-shared-link" class="menu-item action-trigger">
+                            <span class="menu-icon icon-link"></span><span class="menu-text">Create a shared link</span>
+                        </li>
                     </ul>
                 </li>
-                <li action="help" class="menu-item">
+                <li class="menu-item"><span class="menu-icon icon-sphere"></span><span class="menu-text">Language</span>
+                    <ul class="menu menu-language-options">
+                        <li action="lang-zh" class="menu-item action-trigger">
+                            <span class="menu-text">-- 中文</span>
+                        </li>
+                        <li action="lang-en" class="menu-item action-trigger">
+                            <span class="menu-text">-- English</span>
+                        </li>
+                    </ul>
+                </li>
+                <li action="help" class="menu-item action-trigger">
                     <span class="menu-icon icon-help"></span><span class="menu-text">Help</span>
                 </li>
                 <!-- <li class="menu-item"><span class="menu-icon icon-trash"></span><span class="menu-text">Trash</span></li> -->
-                <!-- <li class="menu-item"><span class="menu-icon icon-sphere"></span><span action="lang" id="lang_toggle" class="menu-text">English</span></li> -->
             </ul>
             <div class="hidden-panel">
                 <input type="file" id="jm_file_input" />
             </div>
-            <!--
-            <div id="jsmind_open_dialog" class="jsmind-open-dialog">
-                open
-            </div>
-            -->
         </div>
+        <!-- <div id="jsmind_open_dialog" class="jsmind-open-dialog"> open </div> -->
         <br class="clear">
+    </div>
+    <footer>
+        <nav>
+            <a href="/">&copy;jsMind 2022-2023</a>
+        </nav>
+    </footer>
+    <div class="toast">
+        <div class="toast-content">
+            <span class="toast-icon icon-warning"></span>
+            <div class="toast-message">
+                <p>Oh! The mindmap can not be found. </p>
+                <p>#887dd846-57cd-4b88-beff-1ca025b6bf25</p>
+            </div>
         </div>
-        <footer>
-            <nav>
-                <a href="/">&copy;jsMind 2022-2023</a>
-            </nav>
-        </footer>
-    </body>
-    <script type="text/javascript" src="js/index.html.js"></script>
-    <!-- google analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3X8JTERR25"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+    </div>
+</body>
+<script type="text/javascript" src="js/index.html.js"></script>
+<!-- google analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3X8JTERR25"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
         gtag('js', new Date());
         gtag('config', 'G-3X8JTERR25');
     </script>
+
 </html>

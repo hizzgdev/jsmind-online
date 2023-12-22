@@ -83,6 +83,46 @@ aside .title-bar span {
     margin-right: 11px;
 }
 
+aside section {
+    margin: 12px;
+    font: normal 16px/24px 'Microsoft YaHei', simhei, STHeiTi, sans-serif, Verdana;
+}
+
+aside em {
+    font-style: normal;
+    font-weight: bold;
+    border: solid 1px gray;
+    border-radius: 5px;
+    padding: 1px 3px;
+}
+
+aside .notes {
+    font-size: 14px;
+}
+
+aside code {
+    background-color: #fff;
+    border: solid 1px #eee;
+    font-size: 14px;
+}
+
+aside code.multi-line {
+    display: block;
+    padding: 4px 8px;
+}
+
+aside code a {
+    color: #444;
+}
+
+aside input {
+    height: 30px;
+}
+
+aside button {
+    font-size: 16px;
+    height: 36px;
+}
 .jsmind-tools {
     position: absolute;
     z-index: 100;
@@ -182,11 +222,9 @@ aside .title-bar span {
 .menu-item:hover .menu {
     display: block;
 }
-.menu-compose-options {
-    width: 160px;
-}
-
-.menu-export-options {
+.menu-compose-options,
+.menu-export-options,
+.menu-language-options {
     width: 160px;
 }
 .dialog {
@@ -219,6 +257,45 @@ footer nav a {
     text-decoration: none;
 }
 
+div.toast {
+    position: absolute;
+    display: none;
+    z-index: 105;
+    top: 400px;
+    width: 100%;
+}
+
+div.toast .toast-content {
+    width: 420px;
+    margin: 0 auto;
+    border: solid 1px gray;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 20px 0;
+}
+
+div.toast .toast-icon {
+    display: inline-block;
+    font-size: 36px;
+    width: 40px;
+    margin-left: 20px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+div.toast .icon-warning {
+    color: #faab22;
+}
+
+div.toast .toast-message {
+    display: inline-block;
+    font-size: 16px/1;
+    width: 330px;
+}
+
+div.toast .toast-message p {
+    margin: 2px 0;
+}
 @media screen and (max-device-width: 1024px) {
     .jsmind-tools li {
         opacity: 1;
