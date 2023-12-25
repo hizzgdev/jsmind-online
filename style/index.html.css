@@ -22,7 +22,7 @@ header h1 {
     margin: 0 15px;
     color: #444;
     text-shadow: 1px 1px 1px #fff;
-    font: bold 32px/60px 'Microsoft YaHei', simhei, STHeiTi, sans-serif, Verdana;
+    font: bold 32px/60px jsmind, 'Microsoft YaHei', simhei, STHeiTi, sans-serif, Verdana;
 }
 header nav {
     margin-left: 256px;
