@@ -5,17 +5,21 @@
         return $d.getElementById(id);
     };
     const $q = function (selector) {
+        return $d.querySelector(selector);
+    }
+    const $qa = function (selector) {
         return $d.querySelectorAll(selector);
     }
-    const $header = $d.getElementsByTagName('header')[0];
-    const $footer = $d.getElementsByTagName('footer')[0];
+    const $header = $q('header');
+    const $footer = $q('footer');
     const $layout = $g('layout');
     const $container = $g('jsmind_container');
-    const $setting_panel = $d.getElementsByTagName('aside')[0];
+    const $setting_panel = $q('aside');
+    const $error_panel = $g('jsmind_error');
     const _h_header = $header.clientHeight;
     const _h_footer = $footer.clientHeight;
 
-    const MINDMAPS_API = 'https://v1.api.jsmind.online/mindmaps';
+    const API = new jsMindApi();
     const JSMIND_ONLINE = $w.location.origin;
     const jsMind = $w.jsMind;
 
@@ -58,7 +62,8 @@
         jsMind.$.on($w, 'resize', reset_container_size);
         jsMind.$.on($d, 'click', hide_menu_visible);
         jsMind.$.on($g('jm_file_input'), 'change', jm_file_input_changed);
-        $q('.action-trigger').forEach((ele, _idx, _arr) => jsMind.$.on(ele, 'click', tools_handler));
+        jsMind.$.on($q('.jsmind-error .error-actions'), 'click', handle_error_action);
+        $qa('.action-trigger').forEach((ele, _idx, _arr) => jsMind.$.on(ele, 'click', handle_action));
     }
 
     function hash_changed(e) {
@@ -77,26 +82,14 @@
     }
 
     function load_mindmap(key) {
-        fetch(MINDMAPS_API + '/' + key)
-            .then((response) => response.json())
-            .then((json) => {
-                if (json.success) {
-                    _jm.show(json.data)
-                } else {
-                    show_toast(['Oh! The mindmap can not be found.', key], 3000)
-                        .then(() => hash_to(HASHES.NEW));
-                }
-            })
-            .catch((e) => {
-                show_toast(['Oh! something wrong', e], 3000)
-                    .then(() => hash_to(HASHES.NEW));
-            });
+        API.loadByKey(key)
+            .then((mind) => _jm.show(mind))
+            .catch((e) => show_error(e.message));
     }
 
     function load_mind_demo() {
-        const mind_lang = _get_lang_from_session() || _get_lang_from_browser();
-        fetch(`example/data_intro_${mind_lang}.json`)
-            .then((response) => response.json())
+        const lang = _get_lang_from_session() || _get_lang_from_browser();
+        API.loadSample(lang)
             .then((mind) => _jm.show(mind));
     }
 
@@ -180,7 +173,7 @@
         set_container_size();
     }
     function open_share_dialog(e) {
-        $q('button.action-trigger[action="share"]')[0].disabled = false;
+        $q('button.action-trigger[action="share"]').disabled = false;
         $g('jsmind_author').disabled = false;
         $g('share_progress').style.display = 'none';
         $g('shared_link').style.display = 'none';
@@ -199,18 +192,19 @@
     }
 
     const action_handlers = {
-        menu: toggle_menu_visible,
-        open: open_open_dialog,
-        download: open_save_dialog,
-        screenshot: take_screenshot,
-        empty: () => hash_to(HASHES.NEW),
-        help: open_help_dialog,
+        'menu': toggle_menu_visible,
+        'open': open_open_dialog,
+        'download': open_save_dialog,
+        'screenshot': take_screenshot,
+        'empty': () => hash_to(HASHES.NEW),
+        'help': open_help_dialog,
         'sample': () => hash_to(HASHES.SAMPLE),
         'close-setting-panel': hide_setting_panel,
         'create-shared-link': open_share_dialog,
         'lang-zh': () => change_lang('zh'),
         'lang-en': () => change_lang('en'),
         'share': start_share,
+        'back': go_back,
     };
 
     function hash_to(hash) {
@@ -225,6 +219,10 @@
         }
     }
 
+    function go_back() {
+        $w.history.back();
+    }
+
     function find_menu_item_action(ele) {
         if (ele.className.indexOf('menu-') < 0) {
             return null;
@@ -236,10 +234,28 @@
         return find_menu_item_action(ele.parentElement);
     }
 
-    function tools_handler(e) {
-        const action = e.currentTarget.getAttribute('action');
+    function find_action_trigger(e) {
+        const trigger = e.currentTarget;
+        if (trigger.classList.contains('action-trigger')) {
+            return trigger;
+        }
+        if (trigger.classList.contains('action-trigger-delegate')) {
+            return e.target;
+        }
+        return null;
+    }
+
+    function handle_action(e) {
+        const trigger = find_action_trigger(e);
+        if (!trigger) {
+            console.warn('can not find action trigger');
+            return;
+        }
+        const action = trigger.getAttribute('action');
         if (action in action_handlers) {
             action_handlers[action](e);
+        } else {
+            console.warn(`invalid action: ${action}`);
         }
     }
 
@@ -305,27 +321,26 @@
     function upload_to_cloud(e, author) {
         const mind = _jm.get_data('node_tree');
         mind.meta.author = author || 'Anonymous';
-        console.log(mind);
-        return fetch(MINDMAPS_API, {
-            method: "POST",
-            body: JSON.stringify(mind),
-            headers: {
-                "Content-Type": "application/json; charset=UTF-8"
-            }
-        }).then((res) => res.json());
+        return API.share(mind).then((res) => res.json());
     }
 
-    function show_toast(messages, timeout_ms) {
-        const toast = $q('.toast')[0];
-        const toast_message = $q('.toast .toast-message')[0];
-        toast_message.innerHTML = messages.map(msg => `<p>${msg}</p>`).join('');
-        toast.style.display = 'block';
-        return new Promise(function (resolve, _) {
-            $w.setTimeout(() => {
-                toast.style.display = 'none';
-                resolve();
-            }, timeout_ms);
-        });
+    function hide_error(e) {
+        $error_panel.style.display = 'none';
+        $layout.style.display = '';
+    }
+
+    function show_error(message, actions) {
+        $q('.jsmind-error .error-message').innerHTML = `<p>${message}</p>`;
+        const final_actions = actions || [['back', ['Back']], ['empty', 'New'], ['sample', 'Sample']];
+        const actions_html = final_actions.map(action => `<span action="${action[0]}" class="action-trigger">[${action[1]}]</span>`).join('');
+        $q('.jsmind-error .error-actions').innerHTML = actions_html;
+        $layout.style.display = 'none';
+        $error_panel.style.display = 'block';
+    }
+
+    function handle_error_action(e) {
+        hide_error(e);
+        handle_action(e);
     }
 
     page_load();

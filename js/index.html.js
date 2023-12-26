@@ -15,6 +15,7 @@
         DOM_TO_IMAGE: '/dom-to-image@2.6.0/dist/dom-to-image.min.js'
     }
     const LOCAL_ASSETS = {
+        JSMIND_API: '/js/jsmind-api.js',
         JSMIND_ONLINE: '/js/jsmind-online.js'
     }
 
@@ -91,6 +92,7 @@
                 loadScript(`${cdn}${CDN_ASSETS.DOM_TO_IMAGE}`).then(
                     () => {
                         loadScript(`${cdn}${CDN_ASSETS.JSMIND_SCREENSHOT}`).then(() => {
+                            loadScript(LOCAL_ASSETS.JSMIND_API);
                             loadScript(LOCAL_ASSETS.JSMIND_ONLINE);
                         })
                     }
