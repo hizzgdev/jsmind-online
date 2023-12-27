@@ -248,15 +248,17 @@
     function handle_action(e) {
         const trigger = find_action_trigger(e);
         if (!trigger) {
-            console.warn('can not find action trigger');
-            return;
+            console.warn('can not find the action trigger');
+            return false;
         }
         const action = trigger.getAttribute('action');
         if (action in action_handlers) {
-            action_handlers[action](e);
+            const result = action_handlers[action](e);
+            return result || true;
         } else {
             console.warn(`invalid action: ${action}`);
         }
+        return false;
     }
 
     function jm_file_input_changed(e) {
@@ -332,7 +334,7 @@
     function show_error(message, actions) {
         $q('.jsmind-error .error-message').innerHTML = `<p>${message}</p>`;
         const final_actions = actions || [['back', ['Back']], ['empty', 'New'], ['sample', 'Sample']];
-        const actions_html = final_actions.map(action => `<span action="${action[0]}" class="action-trigger">[${action[1]}]</span>`).join('');
+        const actions_html = final_actions.map(action => `<span action="${action[0]}" class="action-trigger">${action[1]}</span>`).join('');
         $q('.jsmind-error .error-actions').innerHTML = actions_html;
         $layout.style.display = 'none';
         $error_panel.style.display = 'block';
@@ -340,7 +342,9 @@
 
     function handle_error_action(e) {
         hide_error(e);
-        handle_action(e);
+        if (!handle_action(e)) {
+            go_back();
+        }
     }
 
     page_load();

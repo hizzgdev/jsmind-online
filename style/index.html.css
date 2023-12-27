@@ -89,7 +89,7 @@ aside .title-bar span {
 
 aside section {
     margin: 24px;
-        font-size: 16px;
+    font-size: 16px;
         line-height: 24px;
 }
 
@@ -282,15 +282,15 @@ div.jsmind-error {
     position: absolute;
     display: none;
     z-index: 100;
-        top: 200px;
+    top: 200px;
     width: 100%;
 }
 
 div.jsmind-error .error-content {
     width: 480px;
     margin: 0 auto;
-    border-radius: 5px;
-    background-color: #fff;
+    border-radius: 10px;
+        background-color: #f2f2f2;
     padding: 20px 0;
 }
 
@@ -312,20 +312,26 @@ div.jsmind-error .error-content {
 .error-content .error-message p {
     margin: 2px 0;
 }
+
 .error-content .error-actions {
     margin-top: 12px;
     text-align: center;
 }
 
 .error-content .error-actions span {
+    border-radius: 6px;
     margin: 0 4px;
     cursor: pointer;
-    color: #666;
+    color: #000;
+        background-color: #ccc;
+        padding: 2px 8px;
 }
 
 .error-content .error-actions span:hover {
-    color: #000;
+    color: #fff;
+        background-color: #555;
 }
+
 @media screen and (max-device-width: 1024px) {
     .jsmind-tools li {
         opacity: 1;
@@ -363,8 +369,9 @@ div.jsmind-error .error-content {
     footer nav {
         line-height: 20px;
     }
-header h1:first-letter {
-    line-height: 16px;
-}
+
+        header h1:first-letter {
+            line-height: 16px;
+        }
 }
 

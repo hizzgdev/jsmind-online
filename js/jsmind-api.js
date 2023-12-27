@@ -6,11 +6,11 @@ class jsMindApi {
     async loadByKey(key) {
         const response = await fetch(`${this.url}/mindmaps/${key}`);
         if (!response.ok) {
-            throw new Error(`Can not find mindmap, key: ${key}`);
+            throw new Error(`Can not find the mindmap, key: ${key}`);
         }
         const json = await response.json();
         if (!json.success) {
-            throw new Error(`Can not find mindmap, key: ${key}`);
+            throw new Error(`Can not find the mindmap, key: ${key}`);
         }
         return json.data;
     }
