@@ -13,7 +13,7 @@
     const $header = $q('header');
     const $footer = $q('footer');
     const $layout = $g('layout');
-    const $container = $g('jsmind_container');
+    const $container = $g('workbench');
     const $setting_panel = $q('aside');
     const $error_panel = $g('jsmind_error');
     const _h_header = $header.clientHeight;
@@ -160,7 +160,7 @@
         $setting_panel.style.width = (panel_width - 2) + 'px';
         $layout.className = 'setting-panel-visible';
         set_container_size();
-        $container.children[0].scrollBy(panel_width / 2, 0);
+        _jm.view.e_panel.scrollBy(panel_width / 2, 0);
     }
 
     function hide_setting_panel() {
@@ -169,7 +169,7 @@
         _setting_panel_visible = true;
         _setting_panel_visible = false;
         $layout.className = 'setting-panel-hidden';
-        $container.children[0].scrollBy(-panel_width / 2, 0);
+        _jm.view.e_panel.scrollBy(-panel_width / 2, 0);
         set_container_size();
     }
     function open_share_dialog(e) {

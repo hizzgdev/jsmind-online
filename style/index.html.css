@@ -65,8 +65,13 @@ header nav a:hover {
     top: -10000px;
 }
 
-.jsmind-container {
+.workbench {
     float: left;
+    position: relative;
+}
+.jsmind-container {
+    height: 100%;
+        width: 100%;
 }
 
 aside {
@@ -239,8 +244,6 @@ aside button {
     display: block;
 }
 
-.menu-compose-options,
-.menu-export-options,
 .menu-language-options {
     width: 160px;
 }
