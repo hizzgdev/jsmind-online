@@ -18,7 +18,7 @@ header {
     z-index: 100;
 }
 
-header h1 {
+header>h1 {
     float: left;
     margin: 0 15px;
     color: #444;
@@ -26,26 +26,31 @@ header h1 {
     font: bold 32px/60px jsmind, "Microsoft YaHei", Verdana, Arial, Helvetica, sans-serif;
 }
 
-header nav {
-    margin-left: 256px;
+header>nav {
+    float: right;
+    height: 100%;
+    margin-right: 20px;
+    /* margin-left: 256px; */
 }
 
-header nav a {
-    float: left;
+header>nav>ul {
+    /* height: 100%; */
+    list-style: none;
+    margin: 20px 0 0 0;
+    padding: 0;
+}
+
+header>nav>ul>li {
+    display: inline;
+}
+
+header>nav a {
     color: #333;
     text-decoration: none;
-    border: solid 1px gray;
-    border-radius: 3px;
-    padding: 5px 10px;
     text-shadow: 1px 1px 1px #fff;
-    margin: 25px 20px 0 0;
     white-space: nowrap;
     font: normal 14px/1 Verdana, Arial, Helvetica, sans-serif;
-}
-
-header nav a.latest {
-    float: right;
-    border: none;
+    margin-left: 4px;
 }
 
 header nav a:hover {
@@ -69,9 +74,10 @@ header nav a:hover {
     float: left;
     position: relative;
 }
+
 .jsmind-container {
     height: 100%;
-        width: 100%;
+    width: 100%;
 }
 
 aside {
@@ -95,7 +101,7 @@ aside .title-bar span {
 aside section {
     margin: 24px;
     font-size: 16px;
-        line-height: 24px;
+    line-height: 24px;
 }
 
 aside em {
@@ -293,7 +299,7 @@ div.jsmind-error .error-content {
     width: 480px;
     margin: 0 auto;
     border-radius: 10px;
-        background-color: #f2f2f2;
+    background-color: #f2f2f2;
     padding: 20px 0;
 }
 
@@ -326,13 +332,13 @@ div.jsmind-error .error-content {
     margin: 0 4px;
     cursor: pointer;
     color: #000;
-        background-color: #ccc;
+    background-color: #ccc;
         padding: 2px 8px;
 }
 
 .error-content .error-actions span:hover {
     color: #fff;
-        background-color: #555;
+    background-color: #555;
 }
 
 @media screen and (max-device-width: 1024px) {
