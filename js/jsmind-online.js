@@ -323,7 +323,7 @@
     function upload_to_cloud(e, author) {
         const mind = _jm.get_data('node_tree');
         mind.meta.author = author || 'Anonymous';
-        return API.share(mind).then((res) => res.json());
+        return API.share(mind);
     }
 
     function hide_error(e) {

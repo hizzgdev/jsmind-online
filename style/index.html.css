@@ -34,26 +34,39 @@ header>nav {
 }
 
 header>nav>ul {
-    /* height: 100%; */
+    height: 100%;
     list-style: none;
-    margin: 20px 0 0 0;
+    margin: 0;
     padding: 0;
 }
 
 header>nav>ul>li {
-    display: inline;
+    float: left;
+    height: 100%;
+        margin: 0;
+        padding: 0;
 }
 
-header>nav a {
-    color: #333;
+header>nav>ul a {
+    display: block;
     text-decoration: none;
     text-shadow: 1px 1px 1px #fff;
     white-space: nowrap;
-    font: normal 14px/1 Verdana, Arial, Helvetica, sans-serif;
-    margin-left: 4px;
+    font: normal 14px/36px Verdana, Arial, Helvetica, sans-serif;
+    height: 36px;
+        border-radius: 18px;
+        padding: 0 12px;
+        margin-top: 12px;
+        color: #333;
+    cursor: pointer;
 }
 
-header nav a:hover {
+header>nav>ul a>span {
+    margin-right: 4px;
+}
+
+header>nav>ul a:hover {
+    background-color: #e1e1e1;
     color: #0a0;
 }
 
@@ -333,7 +346,7 @@ div.jsmind-error .error-content {
     cursor: pointer;
     color: #000;
     background-color: #ccc;
-        padding: 2px 8px;
+    padding: 2px 8px;
 }
 
 .error-content .error-actions span:hover {
@@ -383,4 +396,3 @@ div.jsmind-error .error-content {
             line-height: 16px;
         }
 }
-
