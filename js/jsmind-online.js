@@ -14,6 +14,7 @@
     const $footer = $q('footer');
     const $layout = $g('layout');
     const $container = $g('workbench');
+    const $title = $g('jsmind_title');
     const $setting_panel = $q('aside');
     const $error_panel = $g('jsmind_error');
     const _h_header = $header.clientHeight;
@@ -83,14 +84,19 @@
 
     function load_mindmap(key) {
         API.loadByKey(key)
-            .then((mind) => _jm.show(mind))
+            .then((mind) => show_mind(mind))
             .catch((e) => show_error(e.message));
     }
 
     function load_mind_demo() {
         const lang = _get_lang_from_session() || _get_lang_from_browser();
         API.loadSample(lang)
-            .then((mind) => _jm.show(mind));
+            .then((mind) => show_mind(mind));
+    }
+
+    function show_mind(mind) {
+        _jm.show(mind);
+        $title.innerHTML = mind.meta.name;
     }
 
     function _get_lang_from_session() {
@@ -186,9 +192,16 @@
         _jm.shoot();
     }
     function jsmind_empty(e) {
-        _jm.show();
-        _jm.mind.name = 'jsMind Map - ' + new Date().getTime();
-        _jm.mind.author = 'Anonymous';
+        const mind = {
+            meta: {
+                name: 'Empty Mindmap',
+                author: 'jsmind.online',
+                version: _jm.version
+            },
+            format: 'node_tree',
+            data: { id: 'root', topic: 'Empty' }
+        }
+        show_mind(mind);
     }
 
     const action_handlers = {
@@ -267,7 +280,7 @@
             jsMind.util.file.read(file_data, function (jsmind_data, jsmind_name) {
                 var mind = jsMind.util.json.string2json(jsmind_data);
                 if (!!mind) {
-                    _jm.show(mind);
+                    show_mind(mind);
                     hash_to(HASHES.LOCAL);
                 } else {
                     console.error('can not open this file as a jsMind file');
