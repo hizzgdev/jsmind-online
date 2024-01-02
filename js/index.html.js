@@ -1,7 +1,7 @@
 (function ($w) {
     'use strict';
     const $d = $w.document;
-    const JSMIND_VERSION = '0.7.9';
+    const JSMIND_VERSION = '0.8.0';
     const CDN_LIST = [
         '//unpkg.com',
         '//cdn.jsdelivr.net/npm',
