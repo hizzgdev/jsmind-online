@@ -43,7 +43,7 @@ header>nav>ul {
 header>nav>ul>li {
     float: left;
     height: 100%;
-        margin: 0;
+    margin: 0;
         padding: 0;
 }
 
@@ -54,7 +54,7 @@ header>nav>ul a {
     white-space: nowrap;
     font: normal 14px/36px Verdana, Arial, Helvetica, sans-serif;
     height: 36px;
-        border-radius: 18px;
+    border-radius: 18px;
         padding: 0 12px;
         margin-top: 12px;
         color: #333;
@@ -82,7 +82,11 @@ header>.title-bar>h2 {
     font: normal 16px/1 "Microsoft YaHei", Verdana, Arial, Helvetica, sans-serif;
     margin: 0 8px 8px 8px;
     padding: 4px;
+    white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 }
+
 .setting-panel-hidden aside {
     display: none;
 }
@@ -378,18 +382,30 @@ div.jsmind-error .error-content {
         height: 36px;
     }
 
-    header h1 {
+        header>h1 {
         margin: 0 4px;
         font-size: 18px;
         line-height: 36px;
     }
 
-    header nav {
-        margin-left: 150px;
+        header>nav {
+            margin-right: 10px;
     }
 
-    header nav a {
-        margin-top: 10px;
+        header>nav>ul a {
+            height: 28px;
+            width: 14px;
+            padding: 0 4px;
+            line-height: 28px;
+            margin-top: 4px;
+            overflow: hidden;
+            border-radius: 4px;
+            background-color: transparent;
+        }
+    
+        header>.title-bar>h2 {
+            font-size: 14px;
+            margin-bottom: 4px;
     }
 
     .jsmind-tools {
