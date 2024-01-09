@@ -62,7 +62,7 @@
     function register_event() {
         jsMind.$.on($w, 'hashchange', hash_changed)
         jsMind.$.on($w, 'resize', reset_container_size);
-        jsMind.$.on($d, 'click', hide_menu_visible);
+        jsMind.$.on($d, 'click', hide_menu);
         jsMind.$.on($g('jm_file_input'), 'change', jm_file_input_changed);
         jsMind.$.on($q('.jsmind-error .error-actions'), 'click', handle_error_action);
         $qa('.action-trigger').forEach((ele, _idx, _arr) => jsMind.$.on(ele, 'click', handle_action));
@@ -130,7 +130,7 @@
     var _menu_visible = true;
     function toggle_menu_visible(e) {
         const tools = $g('jsmind_tools');
-        if (_menu_visible) {
+        if (tools.classList.contains('jsmind-tools-active')) {
             tools.classList.remove('jsmind-tools-active');
             _menu_visible = false;
         } else {
@@ -138,7 +138,16 @@
             _menu_visible = true;
         }
     }
-    function hide_menu_visible(e) {
+
+    function show_menu(e) {
+        const tools = $g('jsmind_tools');
+        if (!tools.classList.contains('jsmind-tools-active')) {
+            tools.classList.add('jsmind-tools-active');
+            _menu_visible = true;
+        }
+    }
+
+    function hide_menu(e) {
         if (!_menu_visible) {
             return;
         }
@@ -378,9 +387,10 @@
     }
 
     function handle_error_action(e) {
+        e.stopPropagation();
         hide_error(e);
         if (!handle_action(e)) {
-            go_back();
+            show_menu();
         }
     }
 
