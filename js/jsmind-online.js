@@ -16,7 +16,7 @@
     const $container = $g('workbench');
     const $title = $g('jsmind_title');
     const $setting_panel = $q('aside');
-    const $section_title = $g('section_title');
+    const $panel_title = $q('.title-bar>label');
     const $error_panel = $g('jsmind_error');
     const _h_header = $header.clientHeight;
     const _h_footer = $footer.clientHeight;
@@ -161,7 +161,7 @@
         jsMind.util.file.save(mind_str, 'text/jsmind', mind_name + '.jm');
     }
 
-    function show_setting_panel(sectionId, sectionTitle) {
+    function show_setting_panel(sectionId, panelTitle) {
         if (!!sectionId) {
             $qa('aside#jsmind_sidebar>section').forEach((section) => {
                 section.style.display = 'none';
@@ -169,7 +169,7 @@
             const section = $g(sectionId);
             section.style.display = '';
         }
-        $section_title.innerHTML = sectionTitle || '';
+        $panel_title.innerHTML = panelTitle || '';
 
         if (_setting_panel_visible) { return; }
         const panel_width = calc_setting_panel_width();
@@ -193,13 +193,13 @@
         $q('button.action-trigger[action="share"]').disabled = false;
         $g('share_progress').style.display = 'none';
         $g('shared_link').style.display = 'none';
-        show_setting_panel('section_share_via_link', 'Share via URL');
+        show_setting_panel('section_share_via_link');
     }
     function open_meta_panel(e) {
         $q('#section_edit_metadata input[name="name"]').value = _jm.mind.name;
         $q('#section_edit_metadata input[name="author"]').value = _jm.mind.author;
         $q('#section_edit_metadata input[name="version"]').value = _jm.mind.version;
-        show_setting_panel('section_edit_metadata', 'Metadata');
+        show_setting_panel('section_edit_metadata');
     }
 
     function metadata_update(e) {

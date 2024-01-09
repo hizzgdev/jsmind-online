@@ -32,29 +32,29 @@
             <div id="jsmind_container" class="jsmind-container"></div>
         </div>
         <aside id="jsmind_sidebar">
-            <div class="title-bar"><label id="section_title">Metadata</label><span action="close-setting-panel"
+            <div class="title-bar"><label></label><span action="close-setting-panel"
                     class="icon-cross action-trigger"></span></div>
             <section id="section_edit_metadata" class="section-edit-metadata">
-                <label>Title</label><input type="text" name="name" placeholder="title of mindmap">
-                <label>Author</label><input type="text" name="author" placeholder="your name or email">
-                <label>Version</label><input type="text" name="version" placeholder="version">
+                <div class="section-title">Metadata</div>
+                <div class="section-body">
+                    <label>Title</label><input type="text" name="name" placeholder="title of mindmap">
+                    <label>Author</label><input type="text" name="author" placeholder="your name or email">
+                    <label>Version</label><input type="text" name="version" placeholder="version">
+                </div>
             </section>
             <section id="section_share_via_link">
-                <p><em>Experimental</em></p>
-                <p>Share your mindmap with others via link. This is an experimental feature, please be aware at this
-                    stage:</p>
-                <ul class="notes">
-                    <li>The shared mindmap will be deleted after 1 hour.</li>
-                    <li>The link will also expire when the mindmap is deleted.</li>
-                </ul>
-                <p>
-                    <button action="share" class="action-trigger">Continue</button>
-                </p>
-                <p id="share_progress">Creating the shared link to the mindmap.</p>
-                <p>
-                    <code id="shared_link"
-                        class="multi-line"><a href="https://jsmind.online/#m/2b8b75f1-9fff-42d8-83f9-031039550ee0">https://jsmind.online/#m/2b8b75f1-9fff-42d8-83f9-031039550ee0</a></code>
-                </p>
+                <div class="section-title">Share via URL</div>
+                <div class="section-body">
+                    <p>[Experimental]</p>
+                    <p>Share your mindmap with others via link.</p>
+                    <ul class="notes">
+                        <li>The share will expire after 1 hour.</li>
+                        <li>The shared mindmap will be deleted.</li>
+                        </ul>
+                    <p><button action="share" class="action-trigger">Share</button></p>
+                    <p id="share_progress">Creating the shared link to the mindmap.</p>
+                    <code id="shared_link" class="multi-line"><a href="https://jsmind.online/#m/id">https://jsmind.online/#m/id</a></code>
+                    </div>
             </section>
         </aside>
         <div id="jsmind_tools" class="jsmind-tools">

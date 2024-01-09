@@ -140,18 +140,22 @@ aside section {
     font-size: 16px;
     line-height: 24px;
     padding: 20px;
-        border: solid 1px #eee;
+    border: solid 1px #eee;
         border-radius: 10px;
         background-color: #fff;
 }
 
-aside section.section-edit-metadata {
+aside section .section-title {
+    margin-bottom: 10px;
+}
+
+aside section.section-edit-metadata .section-body {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
 }
 
-aside section.section-edit-metadata>label {
+aside section.section-edit-metadata .section-body>label {
     flex-basis: 60px;
     flex-grow: 1;
     line-height: 35px;
@@ -161,7 +165,7 @@ aside section.section-edit-metadata>label {
     color: #666;
 }
 
-aside section.section-edit-metadata>input {
+aside section.section-edit-metadata .section-body>input {
     flex-basis: 240px;
     flex-grow: 1;
     border: none;
@@ -170,13 +174,6 @@ aside section.section-edit-metadata>input {
     padding: 0 5px;
     font-family: "Microsoft YaHei", Verdana, Arial, Helvetica, sans-serif;
     margin-top: 2px;
-}
-aside em {
-    font-style: normal;
-    font-weight: bold;
-    border: solid 1px gray;
-    border-radius: 5px;
-    padding: 1px 3px;
 }
 
 aside .notes {
@@ -192,6 +189,7 @@ aside code {
 aside code.multi-line {
     display: block;
     padding: 4px 8px;
+    word-break: break-word;
 }
 
 aside code a {
