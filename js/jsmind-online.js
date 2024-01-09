@@ -127,15 +127,15 @@
         }, 300);
     }
 
-    var _menu_visible = false;
+    var _menu_visible = true;
     function toggle_menu_visible(e) {
         const tools = $g('jsmind_tools');
         if (_menu_visible) {
+            tools.classList.remove('jsmind-tools-active');
             _menu_visible = false;
-            tools.className = tools.className.replace(/\s*jsmind-tools-active/gi, '');
         } else {
+            tools.classList.add('jsmind-tools-active');
             _menu_visible = true;
-            tools.className += ' jsmind-tools-active';
         }
     }
     function hide_menu_visible(e) {
@@ -148,7 +148,7 @@
         }
         const tools = $g('jsmind_tools');
         _menu_visible = false;
-        tools.className = tools.className.replace(/\s*jsmind-tools-active/gi, '');
+        tools.classList.remove('jsmind-tools-active');
     }
 
     function open_open_dialog(e) {
