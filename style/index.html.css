@@ -44,7 +44,7 @@ header>nav>ul>li {
     float: left;
     height: 100%;
     margin: 0;
-        padding: 0;
+    padding: 0;
 }
 
 header>nav>ul a {
@@ -55,7 +55,7 @@ header>nav>ul a {
     font: normal 14px/36px Verdana, Arial, Helvetica, sans-serif;
     height: 36px;
     border-radius: 18px;
-        padding: 0 12px;
+    padding: 0 12px;
         margin-top: 12px;
         color: #333;
     cursor: pointer;
@@ -79,11 +79,12 @@ header>.title-bar {
 }
 
 header>.title-bar>h2 {
+    cursor: pointer;
     font: normal 16px/1 "Microsoft YaHei", Verdana, Arial, Helvetica, sans-serif;
     margin: 0 8px 8px 8px;
     padding: 4px;
     white-space: nowrap;
-        overflow: hidden;
+    overflow: hidden;
         text-overflow: ellipsis;
 }
 
@@ -118,22 +119,58 @@ aside {
 
 aside .title-bar {
     height: 36px;
-    text-align: right;
+    text-align: center;
 }
 
-aside .title-bar span {
+aside .title-bar>label {
+    height: 36px;
+    font: normal 16px/36px "Microsoft YaHei", Verdana, Arial, Helvetica, sans-serif;
+}
+
+aside .title-bar>span {
     color: gray;
     font-size: 14px;
     line-height: 36px;
     margin-right: 11px;
+    float: right;
 }
 
 aside section {
-    margin: 24px;
+    margin: 12px 18px;
     font-size: 16px;
     line-height: 24px;
+    padding: 20px;
+        border: solid 1px #eee;
+        border-radius: 10px;
+        background-color: #fff;
 }
 
+aside section.section-edit-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+aside section.section-edit-metadata>label {
+    flex-basis: 60px;
+    flex-grow: 1;
+    line-height: 35px;
+    margin-right: 10px;
+    font-size: 16px;
+    margin-top: 2px;
+    color: #666;
+}
+
+aside section.section-edit-metadata>input {
+    flex-basis: 240px;
+    flex-grow: 1;
+    border: none;
+    border-bottom: solid 1px #999;
+    font-size: 16px;
+    padding: 0 5px;
+    font-family: "Microsoft YaHei", Verdana, Arial, Helvetica, sans-serif;
+    margin-top: 2px;
+}
 aside em {
     font-style: normal;
     font-weight: bold;

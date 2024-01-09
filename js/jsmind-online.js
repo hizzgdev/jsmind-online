@@ -16,6 +16,7 @@
     const $container = $g('workbench');
     const $title = $g('jsmind_title');
     const $setting_panel = $q('aside');
+    const $section_title = $g('section_title');
     const $error_panel = $g('jsmind_error');
     const _h_header = $header.clientHeight;
     const _h_footer = $footer.clientHeight;
@@ -65,6 +66,7 @@
         jsMind.$.on($g('jm_file_input'), 'change', jm_file_input_changed);
         jsMind.$.on($q('.jsmind-error .error-actions'), 'click', handle_error_action);
         $qa('.action-trigger').forEach((ele, _idx, _arr) => jsMind.$.on(ele, 'click', handle_action));
+        $qa('#section_edit_metadata input[type="text"]').forEach((ele, _idx, _arr) => jsMind.$.on(ele, 'change', metadata_update));
     }
 
     function hash_changed(e) {
@@ -96,7 +98,7 @@
 
     function show_mind(mind) {
         _jm.show(mind);
-        $title.innerHTML = mind.meta.name;
+        $title.innerText = mind.meta.name;
     }
 
     function _get_lang_from_session() {
@@ -159,7 +161,16 @@
         jsMind.util.file.save(mind_str, 'text/jsmind', mind_name + '.jm');
     }
 
-    function show_setting_panel() {
+    function show_setting_panel(sectionId, sectionTitle) {
+        if (!!sectionId) {
+            $qa('aside#jsmind_sidebar>section').forEach((section) => {
+                section.style.display = 'none';
+            })
+            const section = $g(sectionId);
+            section.style.display = '';
+        }
+        $section_title.innerHTML = sectionTitle || '';
+
         if (_setting_panel_visible) { return; }
         const panel_width = calc_setting_panel_width();
         _setting_panel_visible = true;
@@ -180,11 +191,27 @@
     }
     function open_share_dialog(e) {
         $q('button.action-trigger[action="share"]').disabled = false;
-        $g('jsmind_author').disabled = false;
         $g('share_progress').style.display = 'none';
         $g('shared_link').style.display = 'none';
-        show_setting_panel();
+        show_setting_panel('section_share_via_link', 'Share via URL');
     }
+    function open_meta_panel(e) {
+        $q('#section_edit_metadata input[name="name"]').value = _jm.mind.name;
+        $q('#section_edit_metadata input[name="author"]').value = _jm.mind.author;
+        $q('#section_edit_metadata input[name="version"]').value = _jm.mind.version;
+        show_setting_panel('section_edit_metadata', 'Metadata');
+    }
+
+    function metadata_update(e) {
+        const input = e.target;
+        const field_name = input.name;
+        _jm.mind[field_name] = input.value;
+
+        if (field_name === 'name') {
+            $title.innerText = input.value;
+        }
+    }
+
     function open_help_dialog(e) {
         hash_to(HASHES.SAMPLE);
     }
@@ -214,6 +241,7 @@
         'sample': () => hash_to(HASHES.SAMPLE),
         'close-setting-panel': hide_setting_panel,
         'create-shared-link': open_share_dialog,
+        'open-meta-panel': open_meta_panel,
         'lang-zh': () => change_lang('zh'),
         'lang-en': () => change_lang('en'),
         'share': start_share,
@@ -315,27 +343,23 @@
 
     function start_share(e) {
         const trigger_button = e.currentTarget;
-        const ele_author = $g('jsmind_author');
         const progress = $g('share_progress');
         const shared_link = $g('shared_link');
-        ele_author.disabled = true;
         trigger_button.disabled = true;
         progress.style.display = '';
         progress.innerHTML = 'Creating...';
         shared_link.style.display = '';
         shared_link.innerHTML = '...';
-        upload_to_cloud(e, ele_author.value).then((v) => {
+        upload_to_cloud(e).then((v) => {
             progress.innerHTML = 'Created successfully:';
             const link = `${JSMIND_ONLINE}/#m/${v.data.key}`;
             shared_link.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
-            ele_author.disabled = false;
             trigger_button.disabled = false;
         });
     }
 
-    function upload_to_cloud(e, author) {
+    function upload_to_cloud(e) {
         const mind = _jm.get_data('node_tree');
-        mind.meta.author = author || 'Anonymous';
         return API.share(mind);
     }
 
@@ -346,7 +370,7 @@
 
     function show_error(message, actions) {
         $q('.jsmind-error .error-message').innerHTML = `<p>${message}</p>`;
-        const final_actions = actions || [['back', ['Back']], ['empty', 'New'], ['sample', 'Sample']];
+        const final_actions = actions || [['empty', 'New'], ['sample', 'Sample']];
         const actions_html = final_actions.map(action => `<span action="${action[0]}" class="action-trigger">${action[1]}</span>`).join('');
         $q('.jsmind-error .error-actions').innerHTML = actions_html;
         $layout.style.display = 'none';
