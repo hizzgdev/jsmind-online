@@ -5,7 +5,7 @@
     const CDN_LIST = [
         '//unpkg.com',
         '//cdn.jsdelivr.net/npm',
-        '//jsd.onmicrosoft.cn/npm'
+        '//npm.onmicrosoft.cn'
     ]
     const CDN_ASSETS = {
         JSMIND_STYLE_SHEET: `/jsmind@${JSMIND_VERSION}/style/jsmind.css`,
