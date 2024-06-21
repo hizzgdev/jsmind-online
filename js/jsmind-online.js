@@ -46,6 +46,10 @@
             editable: true,
             container: 'jsmind_container',
             theme: 'greensea',
+            support_html: false,
+            view: {
+                enable_device_pixel_ratio: true
+            },
             plugin: {
                 screenshot: {
                     watermark: {
